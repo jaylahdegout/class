@@ -1,0 +1,117 @@
+/**
+ Jaylah DeGout
+ Project 2
+ Exam Statistics Program
+ */
+
+import java.io.*;
+import java.util.*;
+
+
+class ESP
+{
+    static double average(int [] scores) //this function finds the average of the scores
+    {
+        double average = 0;
+        for (int i=0; i<scores.length; i++) //loop to add all scores together
+        {
+            average=average+scores[i];
+        }
+        average=average/(scores.length); //finds the average
+        
+        return average;        
+    }
+    static int max(int [] scores) //this function finds the maximum score
+    {
+        int min=100;
+        int max=0;
+        
+        for (int i=0; i<scores.length;i++) //loop to find the maximum score
+        {
+            if (scores[i]>max) 
+            {
+                max=scores[i];
+            }
+        }
+        return max;
+    }
+    static int min(int [] scores) //this function finds the minimum score
+    {
+        int min=100;
+      
+        for (int i=0; i<scores.length;i++) //loop to check which of the scores is the minimum
+        {
+            if (scores[i]<min)
+            {
+                min=scores[i];
+            }
+        }
+        return min;
+    }
+    public static void main(String [] args)
+        throws IOException
+    {
+        
+       Scanner scores=new Scanner(System.in);
+       System.out.println("Enter the file with scores: ");
+       String file;
+       file=scores.nextLine();
+       //gets the file
+       
+       
+       Scanner scorefile;
+       scorefile=new Scanner(new FileReader(file)); //imports the file
+       
+       int n;
+       n=scorefile.nextInt(); //get the number of numbers
+       
+       int [] list;
+       list=new int[n]; //makes the scores array
+       
+        
+       for (int i=0; i<n; i++) //add scores to the array
+       {
+           list[i]=scorefile.nextInt(); 
+       }
+      
+       
+       scorefile.close();
+       
+       
+       System.out.println("Maximum test score: " +max(list));
+       System.out.println("Minimum test score: " +min(list));
+       //average(list);
+       System.out.println("Average test score: " +average(list));
+       
+       int A = 0;
+       int B = 0;
+       int C = 0;
+       int D = 0;
+       int F = 0;
+       
+       for (int i=0; i<list.length; i++) //ditermines which score is the letter grade 
+        {
+            if (list[i] <= 60)
+                F=F+1;
+            if (list[i] >= 60 && list[i] <= 70)
+                D=D+1;
+            if (list[i] >= 70 && list[i] < 80)
+                C=C+1;
+            if (list[i] >= 80 && list[i] < 90)
+                B=B+1;
+            if (list[i] >= 90 && list[i] < 100)
+                A=A+1;
+        }
+        
+       System.out.println("Number of scores by letter grade:");
+       System.out.println("A: " + A);
+       System.out.println("B: " + B);
+       System.out.println("C: " + C);
+       System.out.println("D: " + D);
+       System.out.println("F: " + F);
+       System.out.println("There are "+(A+B+C+D+F)+" scores.");
+       
+
+       
+    }
+}

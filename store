@@ -1,0 +1,166 @@
+//Class assignment CS142
+
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+//customer C
+//manager M
+//supplier S
+//robber R
+//bum B
+//store is closed Q
+void manager(int, int, int, int, int, int, float);
+void supplier(int &, int &, int &);
+float robber(float &);
+float customer(int, int &, int, int &, int, int &, float &);
+void bum(int, int &, int, int &, int, int &);
+
+
+int main() {
+    srand(time(0));
+
+    char user;
+    int hashbrowns = 5;
+    int cokes = 100;
+    int machetes = 100;
+    int hashbrownsSold;
+    int cokesSold;
+    int machetesSold;
+    float money = 100.00;
+    int newHash;
+    int newCokes;
+    int newMachetes;
+    float moneyMade;
+    
+    
+    char person;
+    cout << "What type of person is approaching?: ";
+    cin >> person;
+    
+    while (person != 'Q') {
+        
+        cout << "Who are you: ";
+        cin >> user;
+        
+        if (user == 'M'){
+            manager(hashbrowns, hashbrownsSold, cokes, cokesSold, machetes, machetesSold, money);
+            continue;
+        }
+        else if (user == 'S'){
+            supplier(newHash, newCokes, newMachetes);
+            hashbrowns += newHash;
+            cokes += newCokes;
+            machetes += newMachetes;
+
+            continue;
+        }
+        else if (user == 'R'){
+            robber(money);
+            money -= money;
+            continue;
+        }
+        else if (user == 'C'){
+            customer(hashbrowns, hashbrownsSold, cokes, cokesSold, machetes, machetesSold, moneyMade);
+            cout << (money += moneyMade) << endl;
+            continue;
+        }
+        else if (user == 'B'){
+            bum(hashbrowns, hashbrownsSold, cokes, cokesSold, machetes, machetesSold);
+            continue;
+        }
+        else if (user == 'Q'){
+            cout << "Sorry we are closed!" << endl;
+            break;
+        }
+        
+        break;
+    }
+    
+    
+    return 0;
+}
+                   
+void manager(int hi, int hs, int ci, int cs, int mi, int ms, float cash){
+    cout << "           Hashbrowns             Coke            Machetes" << endl;
+    cout << "Inventory       " << hi << "           " << ci << "                   " << mi << endl;
+    cout << "Sold            " << hs << "               " << cs << "                   " << ms << endl;
+    cout << "Remaining       " << hi - hs << "            " << ci - cs << "                 " << mi - ms << endl;
+    cout << "Total Money " << "$" << cash << endl;
+}
+                   
+void supplier (int & h, int & c, int & m){
+    cout << "How many more hashbrowns do you have?: ";
+    cin >> h;
+    cout << "How many more cokes do you have?: ";
+    cin >> c;
+    cout << "How many more machetes do you have?: ";
+    cin >> m;
+}
+float robber(float & cash){
+    cash -= cash;
+    return cash;
+}
+
+float customer(int hi, int & hs, int ci, int & cs, int mi, int & ms, float & cash){
+    cout << "How many hashbrowns would you like?: ";
+    cin >> hs;
+    if (hs > hi){
+        cout << "We don't have that many. How many hashbrowns would you like?: ";
+        cin >> hs;
+    }
+    cout << "How many cokes would you like?: ";
+    cin >> cs;
+    if (cs > ci){
+        cout << "We don't have that many. How many cokes would you like?: ";
+        cin >> cs;
+    }
+    cout << "How many machetes would you like?: ";
+    cin >> ms;
+    if (ms > mi){
+        cout << "We don't have that many. How many machetes would you like?: ";
+        cin >> ms;
+    }
+    cout << "hashbrowns: " << hs << endl;
+    cout << "cokes: " << cs << endl;
+    cout << "machetes: " << ms << endl;
+    
+    cash = (12.27*hs) + (24.29*cs) + (17.00*ms);
+    cout << "your total cost is: " << cash << endl;
+    
+    return cash;
+}
+void bum(int hi, int & hs, int ci, int & cs, int mi, int & ms){
+    int a = 3;
+    int b = 17;
+    int x = a + rand() % (b-a+1);
+    if (x <= hi){
+        hs = hs + x;
+    }
+    else if (x > hi) {
+        hs = hi;
+    }
+    a = 2;
+    b = 9;
+    x = a + rand() % (b-a+1);
+    if (x <= ci){
+        cs = cs + x;
+    }
+    else if (x > ci) {
+        cs = ci;
+    }
+    
+    a = 4;
+    b = 7;
+    x = a + rand() % (b-a+1);
+    if (x <= mi){
+        ms = ms + x;
+    }
+    else if (x > ci) {
+        ms = mi;
+    }
+
+    
+}
+

@@ -1,0 +1,36 @@
+
+import java.io.*;
+import java.util.*;
+
+public class Guessing
+{
+    public static int game(int guess,int num)
+        {
+            Scanner cin=new Scanner(System.in); //new scanner
+            
+            System.out.println("Enter your guess: ");
+            guess=cin.nextInt(); //recieves the guess and stores it
+            
+            num=(int)(1+100*Math.random()); //creates a random number 
+            while (guess != num) { 
+            if (guess > num) { //conditions if the guess is higher than the random number
+                System.out.println("Your guess is too high, try again: ");
+                guess=cin.nextInt();
+            }
+            if (guess < num) { //conditions if the guess is lower than the random number
+                System.out.println("Your guess is too low, try again: ");
+                guess=cin.nextInt(); 
+            }
+            if (guess == num) { //conditions if the guess is lower than the random number
+                System.out.println("You did it!");
+            }
+        }
+        return guess;
+        } //this function creates the game
+    public static void main(String [] args)
+        {
+            
+        game (0,0); //plays the game
+        
+        }
+}
